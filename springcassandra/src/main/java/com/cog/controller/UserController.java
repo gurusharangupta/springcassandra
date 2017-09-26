@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cog.empService.EmployeeService;
-import com.cog.model.Employee;
+import com.cog.model.User;
+import com.cog.service.UserService;
 
 @RestController
 @RequestMapping(value="/api")
-public class EmployeeController {
+public class UserController {
 	
 	@Autowired
-	public EmployeeService employeeService;
+	public UserService userService;
 	
-	  @RequestMapping(value = "/employee", method = RequestMethod.POST)    
-	    Employee create(@RequestBody Employee employee) {        
-	        return employeeService.createEmployee(employee);
+	  @RequestMapping(value = "/user", method = RequestMethod.POST)    
+	    public User create(@RequestBody User user) {        
+	        return userService.createUser(user);
 	    }
 	
 

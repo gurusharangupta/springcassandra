@@ -1,5 +1,5 @@
 package com.cog.model;
 
-public class Employee {
+public class User {
 
 }
