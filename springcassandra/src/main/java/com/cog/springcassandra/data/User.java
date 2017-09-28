@@ -14,7 +14,7 @@ public class User {
     private UUID id;
 	 
 	@PrimaryKeyColumn(value="user_name",ordinal=2,type=PrimaryKeyType.PARTITIONED)
-	private String username;
+	private String userName;
 	
 	@Column(value="password")
 	private String password;
@@ -30,6 +30,8 @@ public class User {
 	
 	@Column(value="dob")
 	private Date birthDate;
+	
+	
 	
 	
 	
@@ -69,12 +71,13 @@ public class User {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+	
 	
 	
 
