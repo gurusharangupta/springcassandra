@@ -1,5 +1,11 @@
 package com.cog.springcassandra.controller;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,17 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cog.springcassandra.data.User;
 import com.cog.springcassandra.model.UserForm;
 import com.cog.springcassandra.service.UserService;
+import com.google.common.net.MediaType;
 
-@RestController
-@RequestMapping(value="/api")
+
+@Path("/user")
 public class UserController {
 	
 	@Autowired
 	public UserService userService;
 	
-	  @RequestMapping(value = "/user", method = RequestMethod.POST)    
-	    public User create(@RequestBody UserForm userForm) {        
-	        return userService.createUser(userForm);
+	     @POST
+	     @Path("/create")
+	     @Consumes("application/json")
+	     @Produces("application/json")
+	    public Response create( UserForm userForm) {        
+	       User user =  userService.createUser(userForm);
+	         return Response.status(200).entity(user).build();
 	    }
 	
 
