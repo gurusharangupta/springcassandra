@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages="com.cog")
+@ComponentScan(basePackages="com.cog.springcassandra")
 public class SpringcassandraApplication {
 
 	public static void main(String[] args) {

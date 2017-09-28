@@ -3,6 +3,9 @@ package com.cog.springcassandra.model;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "user")
 public class UserForm {
 
 	private UUID id;

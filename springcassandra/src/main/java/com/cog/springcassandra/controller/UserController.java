@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import com.cog.springcassandra.model.UserForm;
 import com.cog.springcassandra.service.UserService;
 import com.google.common.net.MediaType;
 
-
+@Component
 @Path("/user")
 public class UserController {
 	

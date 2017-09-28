@@ -1,11 +1,13 @@
 package com.cog.springcassandra.converter;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.cog.springcassandra.data.User;
 import com.cog.springcassandra.model.UserForm;
 
+@Component
 public class UserToUserForm implements Converter<User,UserForm>{
 
 	@Override
