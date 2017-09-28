@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cog.springcassandra.data.User;
+import com.cog.springcassandra.model.UserForm;
 import com.cog.springcassandra.service.UserService;
 
 @RestController
@@ -17,8 +18,8 @@ public class UserController {
 	public UserService userService;
 	
 	  @RequestMapping(value = "/user", method = RequestMethod.POST)    
-	    public User create(@RequestBody User user) {        
-	        return userService.createUser(user);
+	    public User create(@RequestBody UserForm userForm) {        
+	        return userService.createUser(userForm);
 	    }
 	
 

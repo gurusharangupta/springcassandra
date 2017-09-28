@@ -20,6 +20,7 @@ public class UserToUserForm implements Converter<User,UserForm>{
 		userForm.setEmail(user.getEmail());
 		userForm.setMobile(user.getMobile());
 		userForm.setUserName(user.getUserName());
+		userForm.setPassword(user.getPassword());
 		return userForm;
 	}
 

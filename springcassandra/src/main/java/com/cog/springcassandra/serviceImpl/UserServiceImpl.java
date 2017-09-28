@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.cog.springcassandra.dao.UserDao;
 import com.cog.springcassandra.data.User;
+import com.cog.springcassandra.model.UserForm;
 import com.cog.springcassandra.service.UserService;
 
 @Service
@@ -14,7 +15,7 @@ public class UserServiceImpl implements UserService {
 	public UserDao userDao;
 
 	@Override
-	public User createUser(User user) {
+	public User createUser(UserForm user) {
 		 
 		return userDao.createUser(user);
 		
