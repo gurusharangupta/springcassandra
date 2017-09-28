@@ -1,9 +1,9 @@
-package com.cog.daoImpl;
+package com.cog.springcassandra.daoImpl;
 
 import org.springframework.stereotype.Repository;
 
-import com.cog.dao.UserDao;
-import com.cog.model.User;
+import com.cog.springcassandra.dao.UserDao;
+import com.cog.springcassandra.data.User;
 
 @Repository
 public class UserDaoImpl implements UserDao{

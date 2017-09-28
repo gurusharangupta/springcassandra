@@ -1,4 +1,4 @@
-package com.cog.controller;
+package com.cog.springcassandra.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cog.model.User;
-import com.cog.service.UserService;
+import com.cog.springcassandra.data.User;
+import com.cog.springcassandra.service.UserService;
 
 @RestController
 @RequestMapping(value="/api")
