@@ -14,7 +14,7 @@ public class UserToUserForm implements Converter<User,UserForm>{
 	public UserForm convert(User user) {
 		
 		UserForm userForm = new UserForm();
-		if(user.getId()!=null && !StringUtils.isEmpty(user.getId()))
+		if(user.getId()!=null && !StringUtils.isEmpty(user.getId())) {
 		
 			userForm.setId(user.getId());
 		userForm.setAddress(user.getAddress());
@@ -23,6 +23,7 @@ public class UserToUserForm implements Converter<User,UserForm>{
 		userForm.setMobile(user.getMobile());
 		userForm.setUserName(user.getUserName());
 		userForm.setPassword(user.getPassword());
+		}
 		return userForm;
 	}
 
