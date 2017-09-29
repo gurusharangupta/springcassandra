@@ -10,19 +10,21 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.cog.springcassandra.data.User;
 import com.cog.springcassandra.model.UserForm;
 import com.cog.springcassandra.service.UserService;
 import com.datastax.driver.core.utils.UUIDs;
-import com.google.common.net.MediaType;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ResponseHeader;
 
 @Component
 @Path("/user")
+@Api(value = "User resource", produces = "application/json")
 public class UserController {
 
 	@Autowired
@@ -32,6 +34,13 @@ public class UserController {
 	@Path("/create")
 	@Consumes("application/json")
 	@Produces("application/json")
+	@ApiOperation(value = "Creates User resource. Accepts : UserData as input ", response = User.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "User resource created", responseHeaders = {
+					@ResponseHeader(name = "Location", description = "The URL to retrieve created resource", response = String.class)
+			}),
+			@ApiResponse(code = 404, message = "Failed to create User resource ")
+	})	
 	public Response create(UserForm userForm) {
 		UUID id = UUIDs.timeBased();
 		userForm.setId(id);

@@ -1,15 +1,46 @@
 package com.cog.springcassandra.util;
 
+import javax.annotation.PostConstruct;
+import javax.ws.rs.ApplicationPath;
+
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
 import com.cog.springcassandra.controller.UserController;
 
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
+
 @Component
-public class JerseyConfig extends ResourceConfig{
-	
+@ApplicationPath("/api")
+public class JerseyConfig extends ResourceConfig {
+
 	public JerseyConfig() {
 		register(UserController.class);
+	}
+
+	@PostConstruct
+	public void init() {
+		// Register components where DI is needed
+		this.configureSwagger();
+	}
+
+	private void configureSwagger() {
+		 // Available at localhost:port/api/swagger.json
+		this.register(ApiListingResource.class);
+		this.register(SwaggerSerializers.class);
+
+		BeanConfig config = new BeanConfig();
+		config.setConfigId("springboot-jersey-swagger-docker-example");
+		config.setTitle("Spring Boot + Jersey + Swagger + Docker Example");
+		config.setVersion("v1");
+		config.setContact("Orlando L Otero");
+		config.setSchemes(new String[] { "http", "https" });
+		config.setBasePath("/api");
+		config.setResourcePackage("com.cog.springcassandra");
+		config.setPrettyPrint(true);
+		config.setScan(true);
 	}
 
 }
