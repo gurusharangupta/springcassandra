@@ -37,7 +37,7 @@ public class UserController {
 	@ApiOperation(value = "Creates User resource. Accepts : UserData as input ", response = User.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "User resource created", responseHeaders = {
-					@ResponseHeader(name = "Location", description = "The URL to retrieve created resource", response = String.class)
+					@ResponseHeader(name = "Location", description = "The URL to retrieve created resource", response = User.class)
 			}),
 			@ApiResponse(code = 404, message = "Failed to create User resource ")
 	})	

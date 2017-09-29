@@ -22,7 +22,6 @@ public class JerseyConfig extends ResourceConfig {
 
 	@PostConstruct
 	public void init() {
-		// Register components where DI is needed
 		this.configureSwagger();
 	}
 
@@ -32,10 +31,10 @@ public class JerseyConfig extends ResourceConfig {
 		this.register(SwaggerSerializers.class);
 
 		BeanConfig config = new BeanConfig();
-		config.setConfigId("springboot-jersey-swagger-docker-example");
-		config.setTitle("Spring Boot + Jersey + Swagger + Docker Example");
+		config.setConfigId("SpringCassandra Application");
+		config.setTitle("Spring Boot + Jersey + Swagger + Cassandra Application");
 		config.setVersion("v1");
-		config.setContact("Orlando L Otero");
+		config.setContact("Gurusharan Gupta");
 		config.setSchemes(new String[] { "http", "https" });
 		config.setBasePath("/api");
 		config.setResourcePackage("com.cog.springcassandra");
