@@ -1,0 +1,16 @@
+{
+  "name": "polymer",
+  "homepage": "https://github.com/gurusharangupta/springcassandra",
+  "description": "spring cassandra application using polymer",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

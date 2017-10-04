@@ -1,0 +1,61 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../js/bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../js/bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../js/bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../js/bower_components/paper-button/paper-button.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-register">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+        /*width: 300px;*/
+        /*margin: 0px auto;*/
+      }
+    </style>
+
+    <div class="flex-container">
+
+      <card-item primary-item>
+        <span slot="title">Register</sapn>
+        <div>
+           <paper-input label="Name"> </paper-input>
+          <paper-input label="Email"> </paper-input>
+          <paper-input label="Phone"> </paper-input>
+          <paper-input label="Date of Birth"> </paper-input>
+        </div>
+      </card-item>
+
+      <card-item primary-item>
+        <span slot="title">Credentials</sapn>
+        <div slot="description">
+          <paper-input label="Password"> </paper-input>
+          <paper-input label="Confirm Password"> </paper-input>
+        </div>
+      </card-item>
+      
+
+    </div>
+  </template>
+
+  <script>
+    class GniRegister extends Polymer.Element {
+      static get is() { return 'gni-register'; }
+    }
+
+    window.customElements.define(GniRegister.is, GniRegister);
+  </script>
+</dom-module>

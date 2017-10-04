@@ -1,0 +1,22 @@
+<link rel="import" href="../../js/bower_components/polymer/polymer.html">
+
+
+<dom-module id="greetings-display">
+  <template>
+   <style>
+      :host {
+        display: block;
+        color:rgba(0, 221, 255, 0.86);
+      }
+    </style>
+	Hello User!
+  </template>
+
+  <script>
+    class GreetingsDisplay extends Polymer.Element {
+      static get is() { return 'greetings-display'; }
+    }
+
+    window.customElements.define(GreetingsDisplay.is, GreetingsDisplay);
+  </script>
+</dom-module>
