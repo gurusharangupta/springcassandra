@@ -9,6 +9,5 @@ public interface UserDao {
 
 	User createUser(UserForm userForm);
 
-	User saveOrUpdate(User user);
 	
 }
