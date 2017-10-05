@@ -22,13 +22,10 @@ public class UserDaoImpl implements UserDao {
 	public User createUser(UserForm userForm) {
 
 		User savedUser = null;
-		savedUser = saveOrUpdate(userFormtoUser.convert(userForm));
+		savedUser = userRepository.save(userFormtoUser.convert(userForm));
 		return savedUser;
 	}
 
-	@Override
-	public User saveOrUpdate(User user) {
-		return userRepository.save(user);
-	}
+
 
 }

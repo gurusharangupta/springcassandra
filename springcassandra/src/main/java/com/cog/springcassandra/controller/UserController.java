@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ResponseHeader;
 
 @Component
-@Path("/user")
+@Path("/users")
 @Api(value = "User resource", produces = "application/json")
 public class UserController {
 
