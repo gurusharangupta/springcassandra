@@ -72,15 +72,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div slot="description">
             <div class="reg-form">
               <iron-form id="regform">
-                <form action="api/user/create" method="post">
+                <form action="api/users/create" method="post">
                   <h5>Choose Account: </h5>
                   <paper-listbox attr-for-selected="item-id" selected="{{formData.productId}}" class="product-tab">
                     <template is="dom-repeat" items="[[products]]">
                         <paper-item item-id="[[item.productId]]">[[item.name]]</paper-item>
-                      </template>            
-                  </paper-listbox>
+                      </template>  </paper-listbox>
                   <paper-input label="Name" 
-                                name="name"
+                                name="userName"
                                 required> </paper-input>
                   <paper-input label="Email" 
                                name="email"
@@ -88,22 +87,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                error-message="Valid email required."
                                required auto-validate> </paper-input>
                   <paper-input label="Phone" 
-                               name="phone"
+                               name="mobile"
                                pattern="[0-9]*"
                                error-message="Phone required."
                                required auto-validate> </paper-input>
+                               
+                  <paper-input label="Address" 
+                               name="address"> </paper-input>
                   <paper-input label="Date of Birth"
                                type="date"
-                               name="dob"
+                               name="birthDate"
                                required> </paper-input>
                   <paper-input name="password" label="Password"
                                error-message="Password required."
                                type="password" required> </paper-input>
-                  <paper-input name="confirmPass"
+                  <!-- <paper-input name="confirmPass"
                                label="Confirm Password"
                                type="password"
                                error-message="Confirm Password required."
-                               required> </paper-input>
+                               required> </paper-input> -->
 
                   <br>
                   <paper-button class="action" on-click="_formSubmit">Register</paper-button>
@@ -153,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _modifyData(){
-          this.$.regform.request.body['productId'] = this.formData.productId;
+          // this.$.regform.request.body['productId'] = this.formData.productId;
 
           // event.detail.productId = self.formData.productId;
           // console.log(this);
