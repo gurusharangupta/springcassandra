@@ -1,0 +1,62 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="product-data.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-detail">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+    </style>
+    
+
+    <app-route
+        route="{{route}}"
+        pattern="/:productId"
+        data="{{routeData}}"></app-route>
+
+    <product-data product-id="{{routeData.productId}}"
+                  product="{{product}}"></product-data>
+
+    <div class="flex-container">
+      <card-item primary-item>
+        <span slot="title">[[product.name]]</span>
+          <span slot="description">
+            <ul>
+              <template is="dom-repeat" items="[[product.mainFeatures]]">
+                <li>[[item]]</li>
+              </template>
+            </ul>
+
+            [[product.moreDetail]]
+
+            <a href="/gni-register/[[product.productId]]" class="primary-link-btn">Get it Now</a>
+            <div class="clearfix"></div>
+          </span>
+      </card-item>
+    </div>
+  </template>
+
+  <script>
+    class GniDetail extends Polymer.Element {
+      static get is() { return 'gni-detail'; }
+
+    }
+
+    window.customElements.define(GniDetail.is, GniDetail);
+  </script>
+</dom-module>

@@ -1,0 +1,65 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-register-success">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+        /*width: 300px;*/
+        /*margin: 0px auto;*/
+        --paper-listbox-background-color:#eeeeee;
+        --paper-listbox-color:#333;
+      }
+
+      .success{
+        padding: 30px;
+        background-color: #eeeeee;
+        text-align: center;
+        font-style: italic;
+        font-size: 21px;
+        font-family: 'Calibri';
+        color: var(--google-green-500);
+        font-weight: normal;
+      }
+    </style>
+
+
+    <div class="flex-container">
+
+      <card-item primary-item>
+          <span slot="title">Registration Successful!</sapn>
+          <div slot="description">
+            <p class="success">
+              You have successfuly registered with Bank! <br>
+              Please look for a confirmation mail and proceed with next step.
+            </p>
+          </div>
+          </div>
+      </card-item>
+      
+
+    </div>
+  </template>
+
+  <script>
+    class GniRegisterSuccess extends Polymer.Element {
+      static get is() { return 'gni-register-success'; }
+    }
+
+    window.customElements.define(GniRegisterSuccess.is, GniRegisterSuccess);
+  </script>
+</dom-module>

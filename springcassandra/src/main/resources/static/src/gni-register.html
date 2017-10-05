@@ -1,0 +1,189 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="product-data.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-register">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+        /*width: 300px;*/
+        /*margin: 0px auto;*/
+        --paper-listbox-background-color:#eeeeee;
+        --paper-listbox-color:#333;
+      }
+
+      .reg-form {
+        width: 300px;
+        padding-left: 30px;
+      }
+     .product-tab {
+        padding: 0px;
+        width:250px;
+      }
+
+      paper-item {
+        cursor: pointer;
+      }
+       /*.product-tab paper-item {
+        background: #eee;
+        padding: 5px;
+        color: #333;
+        font-size: 20px;
+        font-weight: normal;
+        box-shadow: #909090 0px 0px 2px 1px;
+      }
+      */
+      .product-tab paper-item.iron-selected {
+          background: #fb5211;
+          color: #ffffff;
+      }
+    </style>
+
+    <app-route
+        route="{{route}}"
+        pattern="/:productId"
+        data="{{routeData}}"></app-route>
+
+    <product-data products="{{products}}" ></product-data>
+
+
+    <div class="flex-container">
+      <card-item primary-item>
+          <span slot="title">Register</sapn>
+          <div slot="description">
+            <div class="reg-form">
+              <iron-form id="regform">
+                <form action="api/user/create" method="post">
+                  <h5>Choose Account: </h5>
+                  <paper-listbox attr-for-selected="item-id" selected="{{formData.productId}}" class="product-tab">
+                    <template is="dom-repeat" items="[[products]]">
+                        <paper-item item-id="[[item.productId]]">[[item.name]]</paper-item>
+                      </template>            
+                  </paper-listbox>
+                  <paper-input label="Name" 
+                                name="name"
+                                required> </paper-input>
+                  <paper-input label="Email" 
+                               name="email"
+                               pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                               error-message="Valid email required."
+                               required auto-validate> </paper-input>
+                  <paper-input label="Phone" 
+                               name="phone"
+                               pattern="[0-9]*"
+                               error-message="Phone required."
+                               required auto-validate> </paper-input>
+                  <paper-input label="Date of Birth"
+                               type="date"
+                               name="dob"
+                               required> </paper-input>
+                  <paper-input name="password" label="Password"
+                               error-message="Password required."
+                               type="password" required> </paper-input>
+                  <paper-input name="confirmPass"
+                               label="Confirm Password"
+                               type="password"
+                               error-message="Confirm Password required."
+                               required> </paper-input>
+
+                  <br>
+                  <paper-button class="action" on-click="_formSubmit">Register</paper-button>
+            </form>
+               </iron-form>
+            </div>
+          </div>
+      </card-item>
+      
+
+    </div>
+  </template>
+
+  <script>
+    class GniRegister extends Polymer.Element {
+      static get is() { return 'gni-register'; }
+
+      static get properties(){
+        return {
+          formData:{
+            type:Object,
+            value:()=>{
+              return {
+                productId:''
+              }
+            }
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        var regform = this.$.regform;
+
+        regform.allowRedirect = false;
+        regform.addEventListener('iron-form-response', (e)=>this._registerSuccess(e));
+        regform.addEventListener('iron-form-error', (e)=>this._registerFailed(e));
+        regform.addEventListener('iron-form-presubmit', (e)=>this._modifyData(e));
+      }
+
+      static get observers() { return [
+        '_routeProductChanged(routeData.productId)'
+      ]}
+
+      _routeProductChanged(id) {
+        this.set('formData.productId', id);
+      }
+
+      _modifyData(){
+          this.$.regform.request.body['productId'] = this.formData.productId;
+
+          // event.detail.productId = self.formData.productId;
+          // console.log(this);
+          // event.preventDefault();
+        }
+      _registerSuccess() {
+        console.log("Registration Success");
+
+        window.history.pushState({}, null, '/gni-register-success');
+        window.dispatchEvent(new CustomEvent('location-changed'));
+
+        // this.set('route.path', './gni-register-success');
+      }
+
+      _registerFailed() {
+        // this.$.notification.open();
+        console.log("Registration Failed!");
+
+        this.dispatchEvent(new CustomEvent('show-error-toast', {
+          bubbles: true, composed: true, detail: {
+            text: 'Registration Failed!'
+          }}));
+      }
+
+      _formSubmit(){
+        this.$.regform.submit();
+      }
+
+    }
+
+    window.customElements.define(GniRegister.is, GniRegister);
+  </script>
+</dom-module>
