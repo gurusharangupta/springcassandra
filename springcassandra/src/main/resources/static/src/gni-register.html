@@ -72,7 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div slot="description">
             <div class="reg-form">
               <iron-form id="regform">
-                <form action="api/users/create" method="post">
+                <form action="api/users/create" method="post" enctype="application/json">
                   <h5>Choose Account: </h5>
                   <paper-listbox attr-for-selected="item-id" selected="{{formData.productId}}" class="product-tab">
                     <template is="dom-repeat" items="[[products]]">
