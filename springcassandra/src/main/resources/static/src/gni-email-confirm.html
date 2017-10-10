@@ -1,0 +1,100 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-email-confirm">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+      .email-form {
+        width: 300px;
+        padding-left: 30px;
+      }
+
+      .success-sm{
+        padding: 10px;
+        background-color: #eeeeee;
+        text-align: center;
+        font-size: 13px;
+        font-family: Verdana;
+        color: var(--google-green-500);
+        font-weight: bold;
+      }
+    </style>
+
+    <file-validator></file-validator>
+    <div class="flex-container">
+
+      <card-item primary-item>
+          <span slot="title">Account Creation</sapn>
+          <div slot="description">
+            <p class="success-sm">
+              Your identity is verified. Please upload account pdf form to process your account. 
+            </p>
+            <div class="email-form">
+              <iron-form id="account">
+                <form action="api/account" method="post" enctype="multipart/form-data">                  
+                    <paper-input label="Username/ Email Id" 
+                                  name="username"
+                                  required> </paper-input>
+                    <paper-input name="password" 
+                                 label="Password"
+                                 error-message="Password required."
+                                 type="password" 
+                                 required> </paper-input>
+                    <paper-input name="accountForm"
+                                 label="Upload Account Detail Form"
+                                 type="file"
+                                 error-message="Account form is required"
+                                 required> </paper-input>
+
+                    <br>
+                    <paper-button class="action" on-click="_formSubmit">Submit</paper-button>
+                </form>
+              </iron-form>
+            </div>
+          </div>
+          </div>
+      </card-item>
+      
+
+    </div>
+  </template>
+
+  <script>
+    class GniEmailConfirm extends Polymer.Element {
+      static get is() { return 'gni-email-confirm'; }
+
+      ready(){
+        super.ready();
+        console.log(window.myObj);
+        this.$.account.addEventListener('iron-form-submit', function(e){
+          console.log(e);
+        })
+      }
+
+      _formSubmit(){
+        this.$.account.submit();
+      }
+    }
+
+    window.customElements.define(GniEmailConfirm.is, GniEmailConfirm);
+  </script>
+</dom-module>
