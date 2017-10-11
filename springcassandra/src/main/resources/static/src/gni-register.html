@@ -101,11 +101,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <paper-input name="password" label="Password"
                                error-message="Password required."
                                type="password" required> </paper-input>
-                  <!-- <paper-input name="confirmPass"
+                  <paper-input name="confirmPass"
                                label="Confirm Password"
                                type="password"
                                error-message="Confirm Password required."
-                               required> </paper-input> -->
+                               required> </paper-input>
 
                   <br>
                   <paper-button class="action" on-click="_formSubmit">Register</paper-button>
@@ -155,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _modifyData(){
-          // this.$.regform.request.body['productId'] = this.formData.productId;
+          this.$.regform.request.body['productId'] = this.formData.productId;
 
           // event.detail.productId = self.formData.productId;
           // console.log(this);
