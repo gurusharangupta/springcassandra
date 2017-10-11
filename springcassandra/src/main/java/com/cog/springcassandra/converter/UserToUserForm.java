@@ -17,6 +17,8 @@ public class UserToUserForm implements Converter<User,UserForm>{
 		if(user.getId()!=null && !StringUtils.isEmpty(user.getId())) {
 		
 			userForm.setId(user.getId());
+			
+			userForm.setProductId(user.getProductId());
 		userForm.setAddress(user.getAddress());
 		userForm.setBirthDate(user.getBirthDate());
 		userForm.setEmail(user.getEmail());

@@ -12,7 +12,7 @@ import org.springframework.data.cassandra.mapping.Table;
 public class User {
 	@PrimaryKeyColumn(ordinal=1)
     private UUID id;
-	 
+	
 	@PrimaryKeyColumn(value="user_name",ordinal=2,type=PrimaryKeyType.PARTITIONED)
 	private String userName;
 	
@@ -31,10 +31,19 @@ public class User {
 	@Column(value="dob")
 	private Date birthDate;
 	
+	@Column(value="productId")
+	private int productId;
 	
 	
 	
 	
+	
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 	public String getPassword() {
 		return password;
 	}

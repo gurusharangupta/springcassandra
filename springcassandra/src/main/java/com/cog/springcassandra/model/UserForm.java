@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserForm {
 
 	private UUID id;
-	
+	private int productId;
 	private String userName;
 	private String password;
 	private String address;
@@ -71,6 +71,14 @@ public class UserForm {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	
