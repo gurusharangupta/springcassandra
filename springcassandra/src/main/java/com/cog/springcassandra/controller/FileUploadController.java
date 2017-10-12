@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -28,19 +29,21 @@ public class FileUploadController {
 	@Path("/file")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(@DefaultValue("") @FormDataParam("tags") String tags, 
-				@FormDataParam("file") InputStream file,
-				@FormDataParam("file") FormDataContentDisposition fileDisposition) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response uploadFile(@DefaultValue("") @FormDataParam("username") String username, 
+			@DefaultValue("") @FormDataParam("password") String password, 
+				@FormDataParam("accountForm") InputStream file,
+				@FormDataParam("accountForm") FormDataContentDisposition fileDisposition) {
 
 		String fileName = fileDisposition.getFileName();
 		
 		saveFile(file, fileName);
 		
-		String fileDetails = "File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags "+ tags;
+		String fileDetails = "File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags";
 
 		System.out.println(fileDetails);
 
-		return Response.ok(fileDetails).build();
+		return  Response.status(200).entity(fileDetails).build();
 	}
 	
 	private void saveFile(InputStream file, String name) {

@@ -1,19 +1,11 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<link rel="import" href="password-validator.html">
 <link rel="import" href="card-item.html">
 <link rel="import" href="product-data.html">
 <link rel="import" href="shared-styles.html">
@@ -25,8 +17,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
 
         padding: 10px;
-        /*width: 300px;*/
-        /*margin: 0px auto;*/
         --paper-listbox-background-color:#eeeeee;
         --paper-listbox-color:#333;
       }
@@ -43,15 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       paper-item {
         cursor: pointer;
       }
-       /*.product-tab paper-item {
-        background: #eee;
-        padding: 5px;
-        color: #333;
-        font-size: 20px;
-        font-weight: normal;
-        box-shadow: #909090 0px 0px 2px 1px;
-      }
-      */
+
       .product-tab paper-item.iron-selected {
           background: #fb5211;
           color: #ffffff;
@@ -64,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"></app-route>
 
     <product-data products="{{products}}" ></product-data>
-
+    <password-validator actual-password="[[actualPassword]]"></password-validator>
 
     <div class="flex-container">
       <card-item primary-item>
@@ -98,13 +80,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                type="date"
                                name="birthDate"
                                required> </paper-input>
-                  <paper-input name="password" label="Password"
+                  <paper-input name="password"
+                               label="Password"
                                error-message="Password required."
-                               type="password" required> </paper-input>
-                  <paper-input name="confirmPass"
-                               label="Confirm Password"
                                type="password"
-                               error-message="Confirm Password required."
+                               value="{{actualPassword}}"
+                               required> </paper-input>
+                  <paper-input name="test" label="Confirm Password"
+                               type="password"
+                               error-message="Password mismatch!"
+                               validator="password-validator"
                                required> </paper-input>
 
                   <br>
@@ -155,32 +140,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _modifyData(){
-          this.$.regform.request.body['productId'] = this.formData.productId;
-
-          // event.detail.productId = self.formData.productId;
-          // console.log(this);
-          // event.preventDefault();
-        }
+        this.$.regform.request.body['productId'] = this.formData.productId;
+      }
       _registerSuccess() {
-        console.log("Registration Success");
 
         window.history.pushState({}, null, '/gni-register-success');
         window.dispatchEvent(new CustomEvent('location-changed'));
-
-        // this.set('route.path', './gni-register-success');
       }
 
       _registerFailed() {
-        // this.$.notification.open();
-        console.log("Registration Failed!");
-
         this.dispatchEvent(new CustomEvent('show-error-toast', {
           bubbles: true, composed: true, detail: {
             text: 'Registration Failed!'
           }}));
       }
 
-      _formSubmit(){
+      _formSubmit(e){
+        e.preventDefault();
         this.$.regform.submit();
       }
 

@@ -46,11 +46,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span slot="title">Account Creation</sapn>
           <div slot="description">
             <p class="success-sm">
-              Your identity is verified. Please upload account pdf form to process your account. 
+              Your identity is verified. Please upload account pdf form for account processing. 
             </p>
             <div class="email-form">
               <iron-form id="account">
-                <form action="api/account" method="post" enctype="multipart/form-data">                  
+                <form action="api/verifyuser/file" method="post" enctype="multipart/form-data">                  
                     <paper-input label="Username/ Email Id" 
                                   name="username"
                                   required> </paper-input>
