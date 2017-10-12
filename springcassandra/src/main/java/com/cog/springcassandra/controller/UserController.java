@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.cog.springcassandra.data.User;
 import com.cog.springcassandra.model.UserForm;
+import com.cog.springcassandra.service.EmailService;
 import com.cog.springcassandra.service.UserService;
 import com.datastax.driver.core.utils.UUIDs;
 
@@ -29,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	public UserService userService;
+	
+	@Autowired
+    private EmailService emailService; 
 
 	@POST
 	@Path("/create")
@@ -45,7 +49,21 @@ public class UserController {
 		UUID id = UUIDs.timeBased();
 		userForm.setId(id);
 		User user = userService.createUser(userForm);
-		return Response.status(200).entity(user).build();
+		if (user.getId()!=null)
+		{
+			String status=emailService.sendMail(user);
+			System.out.println("=========="+status);
+			if(status.contains("OK")){
+				return Response.status(200).entity(user).build();
+			}
+			else
+			{
+				return Response.status(404).entity(user).build();
+			}
+		}
+		else
+		return Response.status(404).entity(user).build();
+		
 	}
 
 }

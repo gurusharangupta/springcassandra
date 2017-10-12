@@ -16,7 +16,7 @@ public class SpringcassandraApplication {
                 new SpringApplication(SpringcassandraApplication.class);
         Properties properties = new Properties();
         properties.setProperty("spring.resources.staticLocations",
-                "classpath:/static/,classpath:/static/swagger/, classpath:/static/src/");
+                "classpath:/static/,classpath:/static/pdf/sample.pdf,classpath:/static/swagger/, classpath:/static/src/");
         app.setDefaultProperties(properties);
 		SpringApplication.run(SpringcassandraApplication.class, args);
 	}

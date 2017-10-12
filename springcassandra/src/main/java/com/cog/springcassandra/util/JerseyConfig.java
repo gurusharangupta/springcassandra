@@ -6,6 +6,7 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
+import com.cog.springcassandra.controller.EmailController;
 import com.cog.springcassandra.controller.ProductController;
 import com.cog.springcassandra.controller.UserController;
 
@@ -20,6 +21,7 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		register(UserController.class);
 		register(ProductController.class);
+		//register(EmailController.class);
 	}
 
 	@PostConstruct
