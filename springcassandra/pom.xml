@@ -25,9 +25,6 @@
 		<swagger.version>1.5.8</swagger.version>
 	</properties>
 
-
-
-
 	<dependencies>
 
 		<dependency>
@@ -36,31 +33,41 @@
 			<version>${swagger.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-cassandra</artifactId>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+		</dependency>
+
+		<!-- Dont delete -->
+		<!-- <dependency> <groupId>org.jvnet</groupId> <artifactId>mimepull</artifactId> 
+			<version>1.6</version> </dependency> -->
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -71,6 +78,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>

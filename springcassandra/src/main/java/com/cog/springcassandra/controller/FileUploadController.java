@@ -48,7 +48,7 @@ public class FileUploadController {
 	
 	private void saveFile(InputStream file, String name) {
 		/* Change directory path */
-		java.nio.file.Path path = FileSystems.getDefault().getPath("/Volumes/Drive2/temp/file/" + name); 
+		java.nio.file.Path path = FileSystems.getDefault().getPath("C:\\Users\\hiresmart\\PROJECT_DATA\\UPLOAD_DOCS\\" + name); 
 		/* Save InputStream as file */
 		//Files.copy(file, path);
 	}
