@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
@@ -50,16 +40,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </p>
             <div class="email-form">
               <iron-form id="account">
-                <form action="api/verifyuser/file" method="post" enctype="multipart/form-data">                  
-                    <paper-input label="Username/ Email Id" 
+                <form action="api/verifyuser/file" method="post">                  
+                    <paper-input id="username" label="Username/ Email Id" 
                                   name="username"
                                   required> </paper-input>
-                    <paper-input name="password" 
+                    <paper-input id="password" name="password" 
                                  label="Password"
                                  error-message="Password required."
                                  type="password" 
                                  required> </paper-input>
-                    <paper-input name="accountForm"
+                                 [[MyVal]]
+                    <paper-input id="accountForm"
+								 name="accountForm",
+								 value="{{MyVal:change}}"
                                  label="Upload Account Detail Form"
                                  type="file"
                                  error-message="Account form is required"
@@ -84,11 +77,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready(){
         super.ready();
-        console.log(window.myObj);
-        this.$.account.addEventListener('iron-form-submit', function(e){
-          console.log(e);
-        })
+        
+        var accform = this.$.account;
+        
+        var af = this.$.accountForm;
+        var username = this.$.username;
+        var password = this.$.password;
+        
+        accform.addEventListener('iron-form-response', (e)=>this._uploadSuccess(e));
+        accform.addEventListener('iron-form-error', (e)=>this._uploadFailed(e));
+        
+  
+        accform.addEventListener('iron-form-presubmit', function(e){
+        	
+        	var formData = new FormData();
+        	formData.append("username", username.value);
+        	formData.append("password", password.value);
+        	if(af.$.nativeInput.files.length){
+        		formData.append("accountForm", af.$.nativeInput.files[0]);	
+        	}
+            
+        	this.request.contentType = null;
+            this.request.body = formData;
+
+          });
       }
+      
+      _uploadSuccess() {
+
+          window.history.pushState({}, null, '/gni-account-success');
+          window.dispatchEvent(new CustomEvent('location-changed'));
+        }
+
+      _uploadFailed() {
+          this.dispatchEvent(new CustomEvent('show-error-toast', {
+            bubbles: true, composed: true, detail: {
+              text: 'Upload Failed. Try Again'
+            }}));
+        }
 
       _formSubmit(){
         this.$.account.submit();
