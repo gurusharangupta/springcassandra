@@ -116,7 +116,7 @@
           });
       }
       _computeUserId(r) {
-    	  return decodeURIComponent(r.userID);
+    	  return atob(r.userID);
       }
       _uploadSuccess() {
 
