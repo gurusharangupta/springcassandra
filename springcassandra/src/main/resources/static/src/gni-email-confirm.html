@@ -30,6 +30,11 @@
     </style>
 
     <file-validator></file-validator>
+    <app-route
+        route="{{route}}"
+        pattern="/:userID"
+        data="{{routeData}}"></app-route>
+        
     <div class="flex-container">
 
       <card-item primary-item>
@@ -43,7 +48,7 @@
                 <form action="api/verifyuser/file" method="post">                  
                     <paper-input id="username" label="Username/ Email Id" 
                                   name="username"
-                                  required> </paper-input>
+                                  value="{{userID}}" disabled> </paper-input>
                     <paper-input id="password" name="password" 
                                  label="Password"
                                  error-message="Password required."
@@ -72,7 +77,17 @@
   <script>
     class GniEmailConfirm extends Polymer.Element {
       static get is() { return 'gni-email-confirm'; }
-
+      
+      static get properties(){
+    	  return {
+    		  userID:{
+    			  type:String,
+    			  computed: '_computeUserId(routeData)',
+    			  notify: true
+    		  }    		  
+    	  }
+      }
+	
       ready(){
         super.ready();
         
@@ -100,7 +115,9 @@
 
           });
       }
-      
+      _computeUserId(r) {
+    	  return decodeURIComponent(r.userID);
+      }
       _uploadSuccess() {
 
           window.history.pushState({}, null, '/gni-account-success');
