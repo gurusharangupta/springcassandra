@@ -35,7 +35,7 @@ public class FileUploadController {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response uploadFile(@DefaultValue("") @FormDataParam("username") String username, 
+	public Response uploadFile(@DefaultValue("") @FormDataParam("email") String username, 
 			@DefaultValue("") @FormDataParam("password") String password, 
 				@FormDataParam("accountForm") InputStream file,
 				@FormDataParam("accountForm") FormDataContentDisposition fileDisposition) {
