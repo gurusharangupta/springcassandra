@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessage message = mailSender.createMimeMessage();
 			// InternetAddress internetAddress =new InternetAddress(user.getEmail());
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			helper.setFrom(user.getEmail());
+			helper.setFrom("mailto9a@gmail.com");
 
 			helper.setValidateAddresses(true);
 			helper.setTo(user.getEmail());
@@ -65,7 +65,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessage message = mailSender.createMimeMessage();
 
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			helper.setFrom(email);
+			helper.setFrom("mailto9a@gmail.com");
 			helper.setTo(email);
 			helper.setValidateAddresses(true);
 			helper.setSubject("GNI Account created successfully.");
