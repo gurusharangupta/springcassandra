@@ -12,12 +12,11 @@ import org.springframework.context.annotation.ComponentScan;
 public class SpringcassandraApplication {
 
 	public static void main(String[] args) {
-		SpringApplication app =
-                new SpringApplication(SpringcassandraApplication.class);
-        Properties properties = new Properties();
+		SpringApplication app = new SpringApplication(SpringcassandraApplication.class);
+        /*Properties properties = new Properties();
         properties.setProperty("spring.resources.staticLocations",
                 "classpath:/static/,classpath:/static/swagger/, classpath:/static/src/");
-        app.setDefaultProperties(properties);
+        app.setDefaultProperties(properties);*/
 		SpringApplication.run(SpringcassandraApplication.class, args);
 	}
 }
