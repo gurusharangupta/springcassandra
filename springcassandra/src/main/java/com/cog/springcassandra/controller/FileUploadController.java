@@ -19,8 +19,10 @@ import javax.ws.rs.core.Response;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cog.springcassandra.service.EmailService;
 import com.google.common.io.Files;
 
 import io.swagger.annotations.Api;
@@ -30,6 +32,8 @@ import io.swagger.annotations.Api;
 @Api(value = "File Upload resource", produces = "application/json")
 public class FileUploadController {
 
+	@Autowired
+    private EmailService emailService;
 	
 	@Path("/file")
 	@POST
@@ -47,7 +51,7 @@ public class FileUploadController {
 		String fileDetails = "File saved at C:\\\\Users\\\\hiresmart\\\\PROJECT_DATA\\\\UPLOAD_DOCS\\\\" + fileName + " with tags";
 
 		System.out.println(fileDetails);
-
+		emailService.sendConfirmationMail(username);
 		return  Response.status(200).entity(fileDetails).build();
 	}
 	

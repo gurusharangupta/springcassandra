@@ -59,16 +59,18 @@ public class EmailServiceImpl implements EmailService {
 		return mailStatus;
 	}
 
-	public String sendConfirmationMail(User user) {
+	public String sendConfirmationMail(String email) {
 		String mailStatus = null;
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			helper.setTo(user.getEmail());
-			helper.setSubject(user.getUserName() + " Account created successfully");
+			helper.setFrom(email);
+			helper.setTo(email);
+			helper.setValidateAddresses(true);
+			helper.setSubject("Dear User, Account created successfully.");
 
-			helper.setText("Dear" + user.getUserName() + ", your account has been created successfully");
+			helper.setText("Dear User, your account has been created successfully. Please login back in 3 days to operate your account");
 
 			try {
 				mailSender.send(message);
