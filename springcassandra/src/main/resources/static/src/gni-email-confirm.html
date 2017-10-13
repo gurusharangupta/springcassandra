@@ -46,8 +46,8 @@
             <div class="email-form">
               <iron-form id="account">
                 <form action="api/verifyuser/file" method="post">                  
-                    <paper-input id="username" label="Username/ Email Id" 
-                                  name="username"
+                    <paper-input id="email" label="Email Id" 
+                                  name="email"
                                   value="{{userID}}" disabled> </paper-input>
                     <paper-input id="password" name="password" 
                                  label="Password"
@@ -94,7 +94,7 @@
         var accform = this.$.account;
         
         var af = this.$.accountForm;
-        var username = this.$.username;
+        var email = this.$.email;
         var password = this.$.password;
         
         accform.addEventListener('iron-form-response', (e)=>this._uploadSuccess(e));
@@ -104,7 +104,7 @@
         accform.addEventListener('iron-form-presubmit', function(e){
         	
         	var formData = new FormData();
-        	formData.append("username", username.value);
+        	formData.append("email", email.value);
         	formData.append("password", password.value);
         	if(af.$.nativeInput.files.length){
         		formData.append("accountForm", af.$.nativeInput.files[0]);	
@@ -116,7 +116,7 @@
           });
       }
       _computeUserId(r) {
-    	  return decodeURIComponent(r.userID);
+    	  return atob(r.userID);
       }
       _uploadSuccess() {
 
