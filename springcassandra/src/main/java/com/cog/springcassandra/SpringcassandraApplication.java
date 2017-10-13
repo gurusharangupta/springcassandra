@@ -15,8 +15,13 @@ public class SpringcassandraApplication {
 		SpringApplication app = new SpringApplication(SpringcassandraApplication.class);
         /*Properties properties = new Properties();
         properties.setProperty("spring.resources.staticLocations",
+<<<<<<< HEAD
                 "classpath:/static/,classpath:/static/swagger/, classpath:/static/src/");
         app.setDefaultProperties(properties);*/
+/*=======
+                "classpath:/static/,classpath:/static/pdf/sample.pdf,classpath:/static/swagger/, classpath:/static/src/");
+        app.setDefaultProperties(properties);
+>>>>>>> origin/mail-branch-dev*/
 		SpringApplication.run(SpringcassandraApplication.class, args);
 	}
 }

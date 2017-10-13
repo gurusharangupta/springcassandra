@@ -22,10 +22,12 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		register(UserController.class);
 		register(ProductController.class);
+
 		register(FileUploadController.class);
 		
 		/* Required for support of Multipart-FileUpload */
 		register(MultiPartFeature.class);
+
 	}
 
 	@PostConstruct
