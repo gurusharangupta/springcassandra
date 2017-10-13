@@ -33,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
 
 			helper.setValidateAddresses(true);
 			helper.setTo(user.getEmail());
-			helper.setSubject(user.getUserName() + " Account registration confirmation");
+			helper.setSubject("GNI Account registration confirmation");
 			String encodedString = Base64.getEncoder().encodeToString(user.getEmail().getBytes());
 			System.out.println(encodedString);
 			helper.setText("Dear User, Please sign and upload attached pdf at the following link for confirmation\n"
@@ -68,7 +68,7 @@ public class EmailServiceImpl implements EmailService {
 			helper.setFrom(email);
 			helper.setTo(email);
 			helper.setValidateAddresses(true);
-			helper.setSubject("Dear User, Account created successfully.");
+			helper.setSubject("GNI Account created successfully.");
 
 			helper.setText("Dear User, your account has been created successfully. Please login back in 3 days to operate your account");
 
