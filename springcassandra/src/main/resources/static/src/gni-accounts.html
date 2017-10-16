@@ -11,7 +11,11 @@
         padding: 10px;
       }
 
-
+	.prod-image {
+		width:50%;
+		height: 130px;
+		padding: 7px 0px;
+	}
     </style>
 
     <product-data products="{{products}}"></product-data>
@@ -21,14 +25,19 @@
     <div class="flex-container">
       <template is="dom-repeat" items="[[products]]">
         <card-item primary-item on-click="_productClicked">
+        
           <span slot="title">[[item.name]]</span>
           <span slot="description">
+                    	
             [[item.detail]]
+            <div style="display:flex">
+            <img class="prod-image" src="images/products/[[item.productId]].jpg" alt="[[item.name]]" />
             <ul>
               <template is="dom-repeat" items="[[item.mainFeatures]]">
                 <li>[[item]]</li>
               </template>
             </ul>
+            </div>
             <a href="/gni-register/[[item.productId]]" class="primary-link-btn">Get it Now</a>
             <div class="clearfix"></div>
           </span>
