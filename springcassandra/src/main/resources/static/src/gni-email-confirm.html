@@ -58,7 +58,7 @@
 								                 name="accountForm"
                                  label="Upload Account Detail Form"
                                  type="file"
-                                 error-message="Account form is required"
+                                 error-message="Please upload only PDF file."
                                  required> </paper-input>
 
                     <br>
@@ -116,7 +116,9 @@
           });
       }
       _computeUserId(r) {
-    	  return atob(r.userID);
+        if(r) {
+    	   return atob(r.userID);
+        }
       }
       _uploadSuccess() {
 
@@ -132,7 +134,16 @@
         }
 
       _formSubmit(){
-        this.$.account.submit();
+
+        var file = this.$.accountForm.$.nativeInput.value;
+        var fileType = file.split('.').pop();
+        this.$.account.validate();
+
+        if(fileType == 'pdf') {
+          this.$.account.submit();
+        } else {
+          this.$.accountForm.invalid = true;
+        }
       }
     }
 
