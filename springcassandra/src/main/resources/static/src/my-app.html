@@ -19,6 +19,7 @@
 <link rel="lazy-import" href="gni-register-success.html">
 <link rel="lazy-import" href="gni-account-success.html">
 <link rel="lazy-import" href="gni-email-confirm.html">
+<link rel="lazy-import" href="gni-product-compare.html">
 <link rel="lazy-import" href="gni-detail.html">
 <link rel="lazy-import" href="my-view404.html">
 
@@ -89,6 +90,7 @@
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="gni-accounts" href="[[rootPath]]gni-accounts">Products</a>
           <a name="gni-register" href="[[rootPath]]gni-register">Register</a>
+          <a name="gni-product-compare" href="[[rootPath]]gni-product-compare">Compare Products</a>
           <!-- <a name="gni-email-confirm" href="[[rootPath]]gni-email-confirm">Email Redirect Page</a>  -->
         </iron-selector>
       </app-drawer>
@@ -109,6 +111,7 @@
             fallback-selection="view404"
             role="main">
           <gni-accounts name="gni-accounts" route="{{subroute}}"></gni-accounts>
+          <gni-product-compare name="gni-product-compare" route="{{subroute}}"></gni-product-compare>
           <gni-detail name="gni-detail" route="{{subroute}}"></gni-detail>
           <gni-register name="gni-register" route="{{subroute}}"></gni-register>
           <gni-email-confirm name="gni-email-confirm" route="{{subroute}}"></gni-email-confirm>

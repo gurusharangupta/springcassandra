@@ -1,0 +1,212 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-datatable-api/paper-datatable-api.html">
+<link rel="import" href="../bower_components/paper-datatable-api/paper-datatable-api-column.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-checkbox.html">
+
+
+
+<link rel="import" href="product-data.html">
+<link rel="import" href="card-item.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gni-product-compare">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+
+         --paper-listbox-background-color:#eeeeee;
+        --paper-listbox-color:#333;
+      }
+      .full-width{
+        width:100%
+      }
+
+      .float-left{
+        float:left;
+
+      }
+      .float-right{
+        float:right;
+
+      }
+
+      .product-tab paper-item.iron-selected {
+          background: #fb5211;
+          color: #ffffff;
+      }
+
+
+    </style>
+
+
+    <!--<app-route
+        route="{{route}}"
+        pattern="/:productId"
+        data="{{routeData}}"></app-route>-->
+
+    <product-data products="{{products}}"></product-data>
+
+    <app-location route="{{route}}"></app-location>
+
+    <div class="flex-container">
+      <!--<template is="dom-repeat" items="[[products]]">
+        <card-item primary-item on-click="_productClicked">
+          <span slot="title">[[item.name]]</span>
+          <span slot="description">
+            [[item.detail]]
+            <ul>
+              <template is="dom-repeat" items="[[item.mainFeatures]]">
+                <li>[[item]]</li>
+              </template>
+            </ul>
+            <a href="/gni-register/[[item.productId]]" class="primary-link-btn">Get it Now</a>
+            <div class="clearfix"></div>
+          </span>
+
+        </card-item>
+      </template>-->
+      <card-item primary-item >
+        <span slot="title">Product Compare Page</span>
+        <span slot="description">
+
+<dom-bind>
+  <template is="dom-bind">
+    <!-- Fetch an array of users to be shown in the grid -->
+    <iron-ajax auto url="/stub/compare.json" handle-as="json" last-response="{{users}}"></iron-ajax>
+
+      <!-- The array is set as the <vaadin-grid>'s "items" property -->
+    <vaadin-grid aria-label="Basic Binding Example" items="[[users.keyFacts]]">
+
+      <vaadin-grid-column width="50px" flex-grow="0">
+        <template class="header">#</template>
+        <template>[[index]]</template>
+          <!-- If necessary, the footer could be set using <template class="footer"> -->
+        <template class="footer">#</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">
+          <span draggable="true">
+
+          </span>
+        </template>
+        <template>
+          <span draggable="true">
+            [[item.faq]]
+          </span>
+        </template>
+
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">ING Lion Account</template>
+        <template>[[item.prod1_desc]]</template>
+
+      </vaadin-grid-column>
+
+      <vaadin-grid-column width="150px">
+        <template class="header">ING GNI Green Account</template>
+        <template>
+          <p style="white-space: normal">[[item.prod2_desc]]</p>
+        </template>
+
+      </vaadin-grid-column>
+
+    </vaadin-grid>
+  </template>
+</dom-bind>
+
+           <!-- <table>
+                <template is="dom-repeat" items="{{dataColumns}}" as="rowItem">
+
+                    <thead>
+                        {{rowItem.gname}}
+                     </thead>
+
+
+
+
+                  <tbody>
+                   <template is="dom-repeat" items="{{rowItem.cols}}" as="colItem">
+                      <tr>
+                        <td>{{colItem.colName}}</td>
+
+                      </tr>
+
+                    </template>
+
+
+                  </tbody>
+                </template>
+            </table>-->
+
+
+
+
+
+        </span>
+      </card-item>
+
+    </div>
+  </template>
+
+  <script>
+    class GniProductCompare extends Polymer.Element {
+      static get is() { return 'gni-product-compare'; }
+
+      static get properties(){
+        return {
+        compareArray:{
+             type:Array,
+            value: function(){
+                return [];
+            }
+        },
+          dataColumns:{
+            type:Array,
+            value: function(){
+                return [];
+            }
+
+          }
+
+        }
+      }
+
+
+      static get observers() {
+          return [
+            // Observer method name, followed by a list of dependencies, in parenthesis
+            '_compareListChanged(dataColumns.*,0)'
+          ]
+      }
+
+
+
+     _compareListChanged(list){
+        console.log("_compareListChanged");
+       // console.dir(list);
+      //  this.firstName = list.base[0];
+       // return list;
+     }
+
+    }
+
+    window.customElements.define(GniProductCompare.is, GniProductCompare);
+  </script>
+</dom-module>

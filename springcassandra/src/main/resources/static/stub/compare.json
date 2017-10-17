@@ -1,0 +1,25 @@
+{
+  "keyFacts": [{
+    "faq": "How much ?",
+    "prod1_name": "ING Lion Account",
+    "prod2_name": "ING GNI Green Account",
+    "prod1_desc": "€ 0",
+    "prod2_desc": "€ 30/year"
+  },
+    {
+      "faq": "Who is it for?",
+      "prod1_name": "ING Lion Account",
+      "prod2_name": "ING GNI Green Account",
+      "prod1_desc": "Anyone over 18 years of age provided they are legally capable and reside in Belgium",
+      "prod2_desc": "Anyone over 18 years of age."
+    },
+    {
+      "faq": "Online activation?",
+      "prod1_name": "ING Lion Account",
+      "prod2_name": "ING GNI Green Account",
+      "prod1_desc": "Yes, via Home'Bank and ing.be",
+      "prod2_desc": "Yes, via Home'Bank and ing.be"
+    }
+  ]
+
+}
