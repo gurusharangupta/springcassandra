@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../bower_components/paper-item/paper-checkbox.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 
 
@@ -24,33 +25,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="gni-product-compare">
   <template>
-    <style include="shared-styles">
+     <style include="shared-styles">
       :host {
         display: block;
-        padding: 10px;
 
-         --paper-listbox-background-color:#eeeeee;
+        padding: 10px;
+        
+        --paper-listbox-background-color:#eeeeee;
         --paper-listbox-color:#333;
       }
-      .full-width{
-        width:100%
+
+      
+     .product-tab {
+        padding: 0px;
+        width:250px;
+      }
+      
+      .floatRight{
+      	float:right;
+      	width:20%;
+      
+      }
+      
+      .floatLeft{
+      	float:left;
+      	width:80%;
+      
+      }
+      .fullWidth{
+      	width:100%;
       }
 
-      .float-left{
-        float:left;
-
-      }
-      .float-right{
-        float:right;
-
+      paper-item {
+        cursor: pointer;
       }
 
       .product-tab paper-item.iron-selected {
           background: #fb5211;
           color: #ffffff;
       }
-
-
+      
+      .demo {
+		width:100%;
+		height:100%;
+		border:1px solid #A6A6A6;
+		border-collapse:collapse;
+		padding:5px;
+	}
+	.demo th {
+		border:1px solid #A6A6A6;
+		padding:5px;
+		background:#FC8D12;
+	}
+	.demo td {
+		border:1px solid #A6A6A6;
+		padding:5px;
+		background:#E6E6E6;
+	}
+	.comapareBtn{
+		float:right;
+		padding:10px;
+	}
+	.buttonBar{
+		width:100%;
+		padding-top:10px;
+		padding-bottom: 10px;
+		background-color: #ff6600;
+	}
     </style>
 
 
@@ -64,96 +105,73 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-location route="{{route}}"></app-location>
 
     <div class="flex-container">
-      <!--<template is="dom-repeat" items="[[products]]">
-        <card-item primary-item on-click="_productClicked">
-          <span slot="title">[[item.name]]</span>
-          <span slot="description">
-            [[item.detail]]
-            <ul>
-              <template is="dom-repeat" items="[[item.mainFeatures]]">
-                <li>[[item]]</li>
-              </template>
-            </ul>
-            <a href="/gni-register/[[item.productId]]" class="primary-link-btn">Get it Now</a>
-            <div class="clearfix"></div>
-          </span>
-
-        </card-item>
-      </template>-->
+      
+      
       <card-item primary-item >
         <span slot="title">Product Compare Page</span>
         <span slot="description">
+        	
+		<paper-listbox class="fullWidth" attr-for-selected="item-id" selected="{{formData.productId}}" class="product-tab">
+                    <template is="dom-repeat" items="[[products]]">
+                        <paper-item item-id="[[item.productId]]">
+                        <div class="floatLeft">[[item.name]]</div>
+                        <div class="floatRight"><paper-checkbox on-change="selectProduct">Compare</paper-checkbox></div>
+                        </paper-item>
+                      </template>  
+           </paper-listbox>
+           <!-- <div class="buttonBar">
+           	<paper-button class="action" on-click="_compare" class="comapareBtn">Compare</paper-button>
+           	
+           
+           </div> -->
+        	
+        	<!-- <template is="dom-if" filter="_isGreater" observe="rows"> -->
+				<table class="demo">
+					<thead>
+						
+						
+							<tr>
+								<th></th>
+								
+								 <template is="dom-repeat" items="[[columns]]">
+									<th>[[getItemName(item)]]</th>
+								</template>
+							
+							
+							</tr>
+		      					
+		      			
+					</thead>
+					<tbody>
+					<template is="dom-repeat" items="[[rows]]">
+		      	
+		      			<tr>
+		      				<td>[[item.faq]]</td>
+		      				<template is="dom-repeat" items="[[columns]]">
+		      					<td>[[getItem(item)]]</td>
+		      				</template>
+		      				
+		      				
+		      			
+		      			
+		      			</tr>
+		      		</template>   
+		      		</tbody>
+				</table>
+			<!-- </template> -->
+			
+		  <template is="dom-bind">
+		    <!-- Fetch an array of users to be shown in the grid -->
+		    <iron-ajax auto url="/stub/products.json" handle-as="json" last-response="{{products}}"></iron-ajax>
+	      	
+	      	  
+		   
+		    	
+		    
+		  </template>
+		
 
-<dom-bind>
-  <template is="dom-bind">
-    <!-- Fetch an array of users to be shown in the grid -->
-    <iron-ajax auto url="/stub/compare.json" handle-as="json" last-response="{{users}}"></iron-ajax>
-
-      <!-- The array is set as the <vaadin-grid>'s "items" property -->
-    <vaadin-grid aria-label="Basic Binding Example" items="[[users.keyFacts]]">
-
-      <vaadin-grid-column width="50px" flex-grow="0">
-        <template class="header">#</template>
-        <template>[[index]]</template>
-          <!-- If necessary, the footer could be set using <template class="footer"> -->
-        <template class="footer">#</template>
-      </vaadin-grid-column>
-
-      <vaadin-grid-column>
-        <template class="header">
-          <span draggable="true">
-
-          </span>
-        </template>
-        <template>
-          <span draggable="true">
-            [[item.faq]]
-          </span>
-        </template>
-
-      </vaadin-grid-column>
-
-      <vaadin-grid-column>
-        <template class="header">ING Lion Account</template>
-        <template>[[item.prod1_desc]]</template>
-
-      </vaadin-grid-column>
-
-      <vaadin-grid-column width="150px">
-        <template class="header">ING GNI Green Account</template>
-        <template>
-          <p style="white-space: normal">[[item.prod2_desc]]</p>
-        </template>
-
-      </vaadin-grid-column>
-
-    </vaadin-grid>
-  </template>
-</dom-bind>
-
-           <!-- <table>
-                <template is="dom-repeat" items="{{dataColumns}}" as="rowItem">
-
-                    <thead>
-                        {{rowItem.gname}}
-                     </thead>
-
-
-
-
-                  <tbody>
-                   <template is="dom-repeat" items="{{rowItem.cols}}" as="colItem">
-                      <tr>
-                        <td>{{colItem.colName}}</td>
-
-                      </tr>
-
-                    </template>
-
-
-                  </tbody>
-                </template>
-            </table>-->
+           
 
 
 
@@ -171,13 +189,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       static get properties(){
         return {
-        compareArray:{
-             type:Array,
+        faqs:{
+            type:Array,
+            value: function(){
+                return ["How much ?","Who is it for?","Online activation?"];
+            }
+        },
+        selectedProducts:{
+        	type:Array,
+            value: function(){
+                return [];
+            }
+        	
+        },
+        columns:{
+        	type:Array,
             value: function(){
                 return [];
             }
         },
-          dataColumns:{
+          rows:{
             type:Array,
             value: function(){
                 return [];
@@ -192,17 +223,92 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get observers() {
           return [
             // Observer method name, followed by a list of dependencies, in parenthesis
-            '_compareListChanged(dataColumns.*,0)'
+            '_compareListChanged(columns.*)'
           ]
       }
-
-
-
+      
+      _isGreater(){
+    	  return (this.rows.length >0);
+      }
+      getItemName(col){
+    	  let index =  this.columns.indexOf(col);
+    	  let header='';
+    	  if(index > -1){
+    		  header = col["prod"+index+"_name"];
+    	  }
+    	  return header;
+      }
+	
+      getItem(col){
+    	  let index =  this.columns.indexOf(col);
+    	  let detailts='';
+    	  if(index > -1){
+    		  detailts = col["prod"+index+"_desc"];
+    	  }
+    	  return detailts;
+      }
+     _compare(){
+    	let cell={};
+    	let col={}
+    	
+    	//let compareList=[];
+    	// generate faq columns
+    	this.set('rows',[]);
+    	this.set('columns',[]);
+   	  	for(let i=0; i<this.faqs.length;i++){
+   	  		cell={}; 
+   	  		
+   	  		cell.faq=this.faqs[i];
+   	  		
+	   	  	
+	   	 	this.push('rows',cell);
+	   	 
+   	  	}
+   	  	
+   	 for(let j=0; j<this.selectedProducts.length;j++){
+	  		col={};
+	  		col["prod"+j+"_name"]=this.selectedProducts[j].name;
+	 		col["prod"+j+"_desc"]=this.selectedProducts[j].detail;
+	 		this.push('columns',col);
+	  		
+	  	}
+    	
+    	console.dir(this.rows);
+    	console.dir(this.columns);
+    	
+   	 	
+   	  
+     }
+	selectProduct(event){
+		if(event.target.checked) {
+	        console.dir(event.model.item);
+	        this.push('selectedProducts',event.model.item);
+	    }else{
+	    	var index = this.selectedProducts.indexOf(event.model.item);
+	        //this.splice('users', index, 1);
+	        if(index > -1){
+	        	this.splice('selectedProducts', index, 1);
+	        }
+	    	console.log("_selectProduct ",index);
+	    	
+	    }
+		
+		if(this.selectedProducts.length===0){
+			this.set('rows',[]);
+			this.set('columns',[]);
+		}else
+		if(this.selectedProducts.length>1){
+			this._compare();
+		}
+		//this.push('selectedProducts',prod);
+		//console.log("_selectProduct ",this.selectedProducts.length);
+		
+	}
      _compareListChanged(list){
         console.log("_compareListChanged");
        // console.dir(list);
       //  this.firstName = list.base[0];
-       // return list;
+        return list;
      }
 
     }
