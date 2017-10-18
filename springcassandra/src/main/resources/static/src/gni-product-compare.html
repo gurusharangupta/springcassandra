@@ -125,7 +125,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            
            </div> -->
         	
-        	<!-- <template is="dom-if" filter="_isGreater" observe="rows"> -->
+        	<template is="dom-if" if="{{!renderedCount}}">
+   
 				<table class="demo">
 					<thead>
 						
@@ -158,25 +159,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		      		</template>   
 		      		</tbody>
 				</table>
-			<!-- </template> -->
+			</template>
 			
 		  <template is="dom-bind">
 		    <!-- Fetch an array of users to be shown in the grid -->
 		    <iron-ajax auto url="/stub/products.json" handle-as="json" last-response="{{products}}"></iron-ajax>
-	      	
-	      	  
-		   
-		    	
-		    
 		  </template>
-		
-
-           
-
-
-
-
-
+	
         </span>
       </card-item>
 
@@ -194,6 +183,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             value: function(){
                 return ["How much ?","Who is it for?","Online activation?"];
             }
+        },
+        renderedCount:{
+        	type:Boolean,
+        	value:function(){
+        		return true;
+        	}
         },
         selectedProducts:{
         	type:Array,
@@ -273,6 +268,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	  		
 	  	}
     	
+   	 
     	console.dir(this.rows);
     	console.dir(this.columns);
     	
@@ -296,9 +292,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		if(this.selectedProducts.length===0){
 			this.set('rows',[]);
 			this.set('columns',[]);
+			this.renderedCount =  true;
 		}else
 		if(this.selectedProducts.length>1){
 			this._compare();
+			this.renderedCount =  false;
 		}
 		//this.push('selectedProducts',prod);
 		//console.log("_selectProduct ",this.selectedProducts.length);
