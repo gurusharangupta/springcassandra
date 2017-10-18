@@ -25,7 +25,8 @@
     "paper-toast": "PolymerElements/paper-toast#^2.0.0",
     "iron-validator-behavior": "PolymerElements/iron-validator-behavior#^2.0.0",
     "paper-datatable-api": "^2.0.10",
-    "vaadin-grid": "^3.0.2"
+    "vaadin-grid": "^3.0.2",
+    "paper-checkbox": "^2.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"
